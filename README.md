@@ -1,82 +1,50 @@
-🚜 Tractor Performance & Fuel Consumption Estimator
-This Streamlit app helps farm managers estimate tractor fuel consumption and field performance based on ASABE Agricultural Machinery Management guidelines.
+# 🧰 Farm Calibration Toolkit (Streamlit)
 
-✅ Features
+A simple, non-technical Streamlit app (metric units) with **tabs** for:
+1) **Sprayer calibration** (application rate in L/ha + tank planning)
+2) **Seeder calibration** (weight-based kg/ha + population-based seeds/ha)
+3) **Quick fuel & field capacity** (optional planning)
 
-Inputs for tractor and implement details:
+---
 
-Engine Power (kW)
-Load Factor (0–1)
-Hours of Operation
-SVFC (L/kWh)
-Fuel Price
-Field Area (ha)
-Speed (km/h)
-Width (m)
-Field Efficiency (%)
+## Files
+- `tractor_app.py` (the Streamlit app)
+- `requirements.txt`
 
+---
 
-Outputs:
+## Deploy online (no local installation) — Streamlit Cloud
 
-Energy Output (kWh)
-Fuel Consumption (L)
-Fuel Cost
-Effective Field Capacity (ha/h)
-Time Required (h)
+### 1) Create a GitHub repository
+1. Go to https://github.com → **New repository**
+2. Upload these files:
+   - `tractor_app.py`
+   - `requirements.txt`
+   - (optional) `logo.png`
+3. Commit changes
 
+### 2) Deploy on Streamlit Cloud
+1. Go to https://streamlit.io/cloud
+2. Sign in with GitHub
+3. Click **New App**
+4. Select your repository and branch
+5. **Main file path**: `tractor_app.py`
+6. Click **Deploy**
 
-Charts:
+### 3) Add logo (optional)
+- Put `logo.png` in the repo root.
+- In the app, users can also upload a logo using the sidebar uploader.
 
-Fuel Consumption vs Load Factor
-Field Capacity vs Speed
+---
 
+## Troubleshooting
+- **ModuleNotFoundError**: confirm all packages are listed in `requirements.txt`.
+- **App stuck installing**: check spelling/case in `requirements.txt`.
+- **Excel download not working**: ensure `xlsxwriter` is included.
 
-ASABE Typical Values Table
-Download results as Excel
+---
 
-
-✅ How to Run Locally
-
-Clone the repository:
-Shellgit clone https://github.com/<your-username>/tractor-performance-app.gitcd tractor-performance-appShow more lines
-
-Install dependencies:
-Shellpip install -r requirements.txtShow more lines
-
-Run the app:
-Shellstreamlit run tractor_app.pyShow more lines
-
-Open the URL shown in the terminal (usually http://localhost:8501).
-
-
-✅ How to Deploy on Streamlit Cloud
-
-Push tractor_app.py and requirements.txt to your GitHub repository.
-Go to https://streamlit.io/cloud.
-Sign in with your GitHub account.
-Click New App → Select your repo → Enter tractor_app.py as the app file.
-Click Deploy.
-Share the public URL with your team.
-
-
-✅ Troubleshooting
-
-App fails to deploy (ModuleNotFoundError):
-
-Ensure all libraries are listed in requirements.txt.
-
-
-App stuck on “Installing dependencies”:
-
-Check for typos in requirements.txt.
-
-
-Charts not showing:
-
-Confirm plotly is installed and imported correctly.
-
-
-Excel download not working:
-
-Ensure xlsxwriter is in requirements.txt.# Farm-Machinery-Management
-Farm Machinery Management Solution
+## Notes (Formulas used)
+- **Sprayer rate (L/ha)**: `600 × Q(L/min) ÷ [Speed(km/h) × spacing(m)]` (or swath width)
+- **Seeder (kg/ha)**: `kg collected ÷ area tested (ha)`; area tested = `circumference × width × rev ÷ 10,000`
+- **Population**: `seeds per meter = seeds/ha × row spacing ÷ 10,000`
